@@ -1,10 +1,6 @@
-import React from 'react';
-import {PageContainer, ProCard} from '@ant-design/pro-components'
-import { useLocation } from 'react-router';
+import { PageContainer, ProCard } from '@ant-design/pro-components';
 
 function Welcome() {
-  const location = useLocation()
-  console.log('location.........', location)
   return (
     <PageContainer>
       <ProCard title="标题1" headerBordered>

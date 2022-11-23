@@ -1,14 +1,11 @@
 **/*.svg
 package.json
-.umi
-.umi-production
 /dist
 .dockerignore
 .DS_Store
+.gitignore
 .eslintignore
 *.png
-*.gif
-*.jpg
 *.toml
 docker
 .editorconfig
@@ -23,4 +20,10 @@ yarn-error.log
 CNAME
 /build
 /public
-src/common-biz/
+**/*.svg
+package.json
+**/dist/**
+**/lib/**
+**/es/**
+**/__snapshots__/**
+**/.node/**

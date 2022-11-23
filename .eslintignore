@@ -1,9 +1,7 @@
-/lambda/
-/scripts
-/config
-.history
 public
 dist
-.umi
 mock
-src/common-biz/*
+vite-end.d.ts
+!.eslintrc.js
+!.stylelintrc.js
+!.prettierrc.js

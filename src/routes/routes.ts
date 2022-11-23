@@ -1,8 +1,6 @@
-import {lazy} from 'react';
-
 export default [
   {
-    redirect: '/welcome'
+    redirect: '/welcome',
   },
   {
     path: '/welcome',
@@ -14,7 +12,7 @@ export default [
     path: '/list',
     routes: [
       {
-        redirect: '/sub-page2'
+        redirect: '/sub-page2',
       },
       {
         path: '/sub-page2',
@@ -37,9 +35,9 @@ export default [
             name: 'dem222',
             key: 'demo',
             component: () => import('@pages/demo'),
-          }
-        ]
+          },
+        ],
       },
     ],
   },
-]
+];

@@ -1,18 +1,18 @@
-import React from 'react';
-import {PageContainer, ProTable} from '@ant-design/pro-components'
+import { PageContainer, ProTable } from '@ant-design/pro-components';
 
 function Demo() {
   return (
     <PageContainer>
-      <ProTable 
+      <ProTable
         columns={[
           {
             dataIndex: 'name',
             title: '名称',
-          }, {
+          },
+          {
             dataIndex: 'age',
-            title: '年龄'
-          }
+            title: '年龄',
+          },
         ]}
       />
     </PageContainer>
