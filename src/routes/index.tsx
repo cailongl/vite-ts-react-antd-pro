@@ -1,5 +1,4 @@
 import type { MenuDataItem } from '@ant-design/pro-components';
-import React from 'react';
 
 import routes from './routes';
 
@@ -25,7 +24,7 @@ function handleRoutes(routeData: MenuDataItem[], paranentRoute?: MenuDataItem): 
   if (!routeData) return [];
   const position = paranentRoute?.position || [];
   return routeData.map((route: MenuDataItem) => {
-    const { path, name, component, ...rest } = route;
+    const { path, name, ...rest } = route;
     const realPath: string = relativeToAbsoutePath(paranentRoute?.path || '/', path);
     const currentPosition = position.concat([{ path: realPath, breadcrumbName: name }]);
 
@@ -38,7 +37,6 @@ function handleRoutes(routeData: MenuDataItem[], paranentRoute?: MenuDataItem): 
         position: currentPosition,
         path: realPath,
       }),
-      component: component ? React.lazy(component) : null,
     };
     return (ROUTE_MAP[realPath] = newRouteData);
   });

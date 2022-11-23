@@ -1,15 +1,36 @@
 import react from '@vitejs/plugin-react';
 import { resolve } from 'path';
 import { defineConfig } from 'vite';
-import viteEslint from 'vite-plugin-eslint';
+// import viteEslint from 'vite-plugin-eslint';
+import visiualizer from 'rollup-plugin-visualizer';
+// import vitePluginImp from 'vite-plugin-imp';
 
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [
-    react(),
-    viteEslint({
-      failOnError: false,
+    react({
+      babel: {
+        parserOpts: {
+          plugins: ['decorators-legacy'],
+        },
+      },
     }),
+    // viteEslint({
+    //   failOnError: false,
+    // }),
+    visiualizer({
+      open: true,
+      gzipSize: true,
+      brotliSize: true,
+    }),
+    // vitePluginImp({
+    //   optimize: true,
+    //   libList: [
+    //     {
+    //       libName: 'antd',
+    //     },
+    //   ],
+    // }),
   ],
   resolve: {
     alias: {
@@ -21,17 +42,27 @@ export default defineConfig({
       '@utils': resolve(__dirname, 'src/utils'),
       '~antd': resolve(__dirname, 'node_modules/antd'),
     },
-    extensions: ['.js', 'ts', '.jsx', '.tsx', '.json'],
   },
   build: {
+    reportCompressedSize: false,
     target: 'es2015',
-    sourcemap: false,
-    commonjsOptions: {
-      sourceMap: false,
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          lodash: ['lodash'],
+          moment: ['moment'],
+          'react-vendor': ['react', 'react-dom'],
+          antd: ['antd'],
+          'ant-icons': ['@ant-design/icons'],
+          'ant-pro': ['@ant-design/pro-components'],
+        },
+      },
     },
-    minify: true,
   },
   css: {
+    modules: {
+      localsConvention: 'camelCaseOnly',
+    },
     preprocessorOptions: {
       less: {
         javascriptEnabled: true,

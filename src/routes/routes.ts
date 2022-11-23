@@ -1,3 +1,5 @@
+import React from 'react';
+
 export default [
   {
     redirect: '/welcome',
@@ -5,7 +7,7 @@ export default [
   {
     path: '/welcome',
     name: '欢迎',
-    component: () => import('@pages/welcome'),
+    component: React.lazy(() => import('@pages/welcome')),
   },
   {
     name: '列表页',
@@ -17,7 +19,7 @@ export default [
       {
         path: '/sub-page2',
         name: '欢迎页',
-        component: () => import('@pages/welcome'),
+        component: React.lazy(() => import('@pages/welcome')),
       },
       {
         path: '/list/sub-page3',
@@ -28,13 +30,13 @@ export default [
             name: 'demo111',
             hideInMenu: true,
             key: 'demo',
-            component: () => import('@pages/welcome'),
+            component: React.lazy(() => import('@pages/welcome')),
           },
           {
             path: '/tt/sub-page33333',
             name: 'dem222',
             key: 'demo',
-            component: () => import('@pages/demo'),
+            component: React.lazy(() => import('@pages/demo')),
           },
         ],
       },

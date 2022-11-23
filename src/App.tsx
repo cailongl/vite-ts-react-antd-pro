@@ -46,7 +46,7 @@ const App = function App() {
   const nestedRoutes = useMemo(() => generateRoute(routesConfig), []);
   return (
     <ProLayout
-      route={{ routesConfig }}
+      route={{ routes: routesConfig }}
       location={location}
       headerHeight={56}
       navTheme="light"
