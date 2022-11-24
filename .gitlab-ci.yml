@@ -32,8 +32,8 @@ stages:
 lint-dev:
   stage: build #不卡着build
   script:
-    - npm run install | while IFS= read -r line; do printf '%s %s\n' "$(date)" "$line"; done
-    - npm run lint-staged:js | while IFS= read -r line; do printf '%s %s\n' "$(date)" "$line"; done
+    - npm install | while IFS= read -r line; do printf '%s %s\n' "$(date)" "$line"; done
+    - npm run lint | while IFS= read -r line; do printf '%s %s\n' "$(date)" "$line"; done
   only:
     - dev
     - /^dev-.*$/
@@ -44,7 +44,7 @@ lint-dev:
 build-dev:
   stage: build
   script:
-    - npm install | while IFS= read -r line; do printf '%s %s\n' "$(date)" "$line"; done
+    - npm run release | while IFS= read -r line; do printf '%s %s\n' "$(date)" "$line"; done
     - GAIA_COMMIT_INFO=$IMAGE_VERSION npm run build | while IFS= read -r line; do printf '%s %s\n' "$(date)" "$line"; done
 
     - IMAGE=$REGISTRY_URL/$HARBOR_GROUP_NAME-dev/$APP_NAME:$IMAGE_VERSION
@@ -61,7 +61,7 @@ build-dev:
 build-release:
   stage: build
   script:
-    - npm install
+    - npm release
     - GAIA_COMMIT_INFO=$IMAGE_VERSION npm run build
 
     - IMAGE=$REGISTRY_URL/$HARBOR_GROUP_NAME-release-$BranchLabel/$APP_NAME:$IMAGE_VERSION
