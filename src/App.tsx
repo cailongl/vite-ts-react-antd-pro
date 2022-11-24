@@ -58,6 +58,9 @@ const App = function App() {
       splitMenus
       layout="mix"
       siderWidth={208}
+      breadcrumbProps={{
+        itemRender: (route) => <Link to={route.path}>{route.breadcrumbName}</Link>,
+      }}
       breadcrumbRender={() => {
         const currentRouteData = ROUTE_MAP[location.pathname];
         return currentRouteData?.position || [];

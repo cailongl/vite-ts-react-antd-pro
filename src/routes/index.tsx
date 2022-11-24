@@ -44,6 +44,4 @@ function handleRoutes(routeData: MenuDataItem[], paranentRoute?: MenuDataItem): 
 
 const newRoutes = handleRoutes(routes);
 
-console.log('newRoutes....', newRoutes);
-
 export default newRoutes;

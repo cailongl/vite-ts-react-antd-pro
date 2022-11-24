@@ -1,5 +1,6 @@
 import React from 'react';
 
+// 可采用相当路径 or 绝对路径，而且path 可以前缀不一致也可以放在一起
 export default [
   {
     redirect: '/welcome',
@@ -25,6 +26,9 @@ export default [
         path: '/list/sub-page3',
         name: 'demo页',
         routes: [
+          {
+            redirect: '/tt/sub-page33333',
+          },
           {
             path: '/sub-page2222',
             name: 'demo111',
