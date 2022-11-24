@@ -39,7 +39,7 @@ lint-dev:
     paths:
       - node_modules
   script:
-    - npm i | while IFS= read -r line; do printf '%s %s\n' "$(date)" "$line"; done
+    - npm ci | while IFS= read -r line; do printf '%s %s\n' "$(date)" "$line"; done
     - npm run lint | while IFS= read -r line; do printf '%s %s\n' "$(date)" "$line"; done
   only:
     - dev
@@ -53,6 +53,7 @@ build-dev:
   cache:
     paths:
       - node_modules
+    policy: pull
   script:
 #    - npm i | while IFS= read -r line; do printf '%s %s\n' "$(date)" "$line"; done
     - GAIA_COMMIT_INFO=$IMAGE_VERSION npm run build | while IFS= read -r line; do printf '%s %s\n' "$(date)" "$line"; done
