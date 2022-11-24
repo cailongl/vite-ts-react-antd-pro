@@ -15,22 +15,11 @@ export default defineConfig({
         },
       },
     }),
-    // viteEslint({
-    //   failOnError: false,
-    // }),
     visiualizer({
       open: true,
       gzipSize: true,
       brotliSize: true,
     }),
-    // vitePluginImp({
-    //   optimize: true,
-    //   libList: [
-    //     {
-    //       libName: 'antd',
-    //     },
-    //   ],
-    // }),
   ],
   resolve: {
     alias: {
@@ -38,6 +27,7 @@ export default defineConfig({
       '@service': resolve(__dirname, 'src/service'),
       '@common': resolve(__dirname, 'src/common'),
       '@component': resolve(__dirname, 'src/component'),
+      '@hook': resolve(__dirname, 'src/hook'),
       '@assets': resolve(__dirname, 'src/assets'),
       '@utils': resolve(__dirname, 'src/utils'),
       '@routes': resolve(__dirname, 'src/routes'),
