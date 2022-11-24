@@ -30,9 +30,9 @@ stages:
   - build
 
 lint-dev:
-  stage: build #不卡着build
+  stage: lint #不卡着build
   script:
-    - npm install | while IFS= read -r line; do printf '%s %s\n' "$(date)" "$line"; done
+    - npm ci | while IFS= read -r line; do printf '%s %s\n' "$(date)" "$line"; done
     - npm run lint | while IFS= read -r line; do printf '%s %s\n' "$(date)" "$line"; done
   only:
     - dev
@@ -44,11 +44,11 @@ lint-dev:
 build-dev:
   stage: build
   script:
-    - npm run release | while IFS= read -r line; do printf '%s %s\n' "$(date)" "$line"; done
+    - npm ci | while IFS= read -r line; do printf '%s %s\n' "$(date)" "$line"; done
     - GAIA_COMMIT_INFO=$IMAGE_VERSION npm run build | while IFS= read -r line; do printf '%s %s\n' "$(date)" "$line"; done
 
     - IMAGE=$REGISTRY_URL/$HARBOR_GROUP_NAME-dev/$APP_NAME:$IMAGE_VERSION
-    - ./buildctl --addr tcp://10.99.253.223:1234 build --frontend dockerfile.v0 --local context=. --local dockerfile=./ --output type=image,registry.insecure=true,name=$IMAGE,push=true --allow security.insecure --opt filename=Dockerfile --opt platform=linux/amd64,linux/arm64
+    # - ./buildctl --addr tcp://10.99.253.223:1234 build --frontend dockerfile.v0 --local context=. --local dockerfile=./ --output type=image,registry.insecure=true,name=$IMAGE,push=true --allow security.insecure --opt filename=Dockerfile --opt platform=linux/amd64,linux/arm64
 
   only:
     - dev
@@ -58,17 +58,17 @@ build-dev:
   tags:
     - k8s-frontend
 
-build-release:
-  stage: build
-  script:
-    - npm release
-    - GAIA_COMMIT_INFO=$IMAGE_VERSION npm run build
+# build-release:
+#   stage: build
+#   script:
+#     - npm release
+#     - GAIA_COMMIT_INFO=$IMAGE_VERSION npm run build
 
-    - IMAGE=$REGISTRY_URL/$HARBOR_GROUP_NAME-release-$BranchLabel/$APP_NAME:$IMAGE_VERSION
-    - ./buildctl --addr tcp://10.99.253.223:1234 build --frontend dockerfile.v0 --local context=. --local dockerfile=./ --output type=image,registry.insecure=true,name=$IMAGE,push=true --allow security.insecure --opt filename=Dockerfile --opt platform=linux/amd64,linux/arm64
+#     - IMAGE=$REGISTRY_URL/$HARBOR_GROUP_NAME-release-$BranchLabel/$APP_NAME:$IMAGE_VERSION
+#     - ./buildctl --addr tcp://10.99.253.223:1234 build --frontend dockerfile.v0 --local context=. --local dockerfile=./ --output type=image,registry.insecure=true,name=$IMAGE,push=true --allow security.insecure --opt filename=Dockerfile --opt platform=linux/amd64,linux/arm64
 
-  only:
-    - /^release\/(|cube|edge)\d+\.\d+\.\d+$/
-    - /^release\/(|cube|edge)\d+\.\d+\.\d+\.\d+$/
-  tags:
-    - k8s-frontend
+#   only:
+#     - /^release\/(|cube|edge)\d+\.\d+\.\d+$/
+#     - /^release\/(|cube|edge)\d+\.\d+\.\d+\.\d+$/
+#   tags:
+#     - k8s-frontend
