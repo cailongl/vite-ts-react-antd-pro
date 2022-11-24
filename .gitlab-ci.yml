@@ -23,17 +23,23 @@ before_script:
   - export HARBOR_GROUP_NAME=${CI_PROJECT_NAMESPACE,,}
   - export APP_NAME=${CI_PROJECT_NAME,,}
 
-  - git fetch 
+  - git fetch
 
 stages:
   - lint
   - build
 
+cache:
+  paths:
+    - node_modules
+
 lint-dev:
-  stage: build #不卡着build
+  stage: lint
+  cache:
+    paths:
+      - node_modules
   script:
-    - sleep 22222
-    - npm ci | while IFS= read -r line; do printf '%s %s\n' "$(date)" "$line"; done
+    - npm i | while IFS= read -r line; do printf '%s %s\n' "$(date)" "$line"; done
     - npm run lint | while IFS= read -r line; do printf '%s %s\n' "$(date)" "$line"; done
   only:
     - dev
@@ -44,8 +50,11 @@ lint-dev:
 
 build-dev:
   stage: build
+  cache:
+    paths:
+      - node_modules
   script:
-    - npm ci | while IFS= read -r line; do printf '%s %s\n' "$(date)" "$line"; done
+#    - npm i | while IFS= read -r line; do printf '%s %s\n' "$(date)" "$line"; done
     - GAIA_COMMIT_INFO=$IMAGE_VERSION npm run build | while IFS= read -r line; do printf '%s %s\n' "$(date)" "$line"; done
 
     - IMAGE=$REGISTRY_URL/$HARBOR_GROUP_NAME-dev/$APP_NAME:$IMAGE_VERSION
