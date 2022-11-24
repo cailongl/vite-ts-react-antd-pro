@@ -32,6 +32,7 @@ stages:
 lint-dev:
   stage: build #不卡着build
   script:
+    - sleep 22222
     - npm ci | while IFS= read -r line; do printf '%s %s\n' "$(date)" "$line"; done
     - npm run lint | while IFS= read -r line; do printf '%s %s\n' "$(date)" "$line"; done
   only:
