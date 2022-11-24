@@ -1,4 +1,4 @@
-image: $REGISTRY_URL/k8s/docker:19.03.12-dind-tools
+image: $REGISTRY_URL/k8s/docker:19.03.12-dind-tools-nodejs
 
 variables:
   DOCKER_HOST: tcp://localhost:2376
@@ -8,7 +8,7 @@ variables:
   DOCKER_DAEMON_OPTIONS: --insecure-registry=$REGISTRY_URL
 
 services:
-  - name: $REGISTRY_URL/k8s/docker:19.03.12-dind-tools
+  - name: $REGISTRY_URL/k8s/docker:19.03.12-dind-tools-nodejs
     entrypoint: ["sh", "-c", "dockerd-entrypoint.sh $DOCKER_DAEMON_OPTIONS"]
 
 before_script:
