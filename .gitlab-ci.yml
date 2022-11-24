@@ -30,7 +30,7 @@ stages:
   - build
 
 lint-dev:
-  stage: lint #不卡着build
+  stage: build #不卡着build
   script:
     - npm ci | while IFS= read -r line; do printf '%s %s\n' "$(date)" "$line"; done
     - npm run lint | while IFS= read -r line; do printf '%s %s\n' "$(date)" "$line"; done
