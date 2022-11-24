@@ -6,34 +6,36 @@
 
 ## File tree
 
+```
 .
 ├── README.md
-├── dist build 后的静态文件 
-├── index.html 渲染 html 模板 
+├── dist build --------------------------后的静态文件 
+├── index.html --------------------------渲染 html 模板 
 ├── jsconfig.json
 ├── package-lock.json
 ├── package.json
-├── public 公共资源
+├── public ------------------------------公共资源
 ├── src
-│   ├── App.tsx common layout 层 
-│   ├── assets 放 image，svg，等静态资源 
+│   ├── App.tsx -------------------------common layout 层 
+│   ├── assets --------------------------放 image，svg，等静态资源 
 │   ├── common
 │   ├── component
 │   ├── hook
-│   ├── index.less 入口样式
-│   ├── main.tsx 入口文件
+│   ├── index.less ----------------------入口样式
+│   ├── main.tsx ------------------------入口文件
 │   ├── pages
 │   ├── routes
 │   │   ├── index.tsx
-│   │   └── routes.ts 路由配置
+│   │   └── routes.ts -------------------路由配置
 │   ├── service
-│   │   └── axios.ts 请求 request公共处理
+│   │   └── axios.ts --------------------请求 request公共处理
 │   ├── utils
-│   │   └── utils.ts 工具库
+│   │   └── utils.ts --------------------工具库
 │   └── vite-env.d.ts
 ├── tsconfig.json
 ├── tsconfig.node.json
 └── vite.config.ts
+```
 
 ## Path alias
 
