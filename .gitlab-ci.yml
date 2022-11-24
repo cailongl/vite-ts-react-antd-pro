@@ -23,7 +23,7 @@ before_script:
   - export HARBOR_GROUP_NAME=${CI_PROJECT_NAMESPACE,,}
   - export APP_NAME=${CI_PROJECT_NAME,,}
 
-  - git fetch --unshallow
+  - git fetch 
 
 stages:
   - lint
