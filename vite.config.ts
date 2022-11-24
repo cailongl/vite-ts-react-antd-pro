@@ -40,6 +40,7 @@ export default defineConfig({
       '@component': resolve(__dirname, 'src/component'),
       '@assets': resolve(__dirname, 'src/assets'),
       '@utils': resolve(__dirname, 'src/utils'),
+      '@routes': resolve(__dirname, 'src/routes'),
       '~antd': resolve(__dirname, 'node_modules/antd'),
     },
   },
