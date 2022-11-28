@@ -2,8 +2,6 @@
 
 脱离 umijs，单独使用 pro-component
 
-文件命名规范，小写，`-`链接
-
 ## File tree
 
 ```
