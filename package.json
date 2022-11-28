@@ -7,7 +7,10 @@
     "dev": "vite",
     "build": "tsc && vite build",
     "preview": "vite preview",
+    "release": "npm install && npm run build",
+    "lint": "npm run lint:style && npm run lint:js",
     "prettier": "prettier --write '**/*.{js,jsx,tsx,ts,less,json}'",
+    "lint:js": "eslint --ext .js,.jsx,.ts,.tsx",
     "lint:style": "stylelint --fix \"src/**/*.less\" --custom-syntax postcss-less",
     "lint:fix": "eslint . --fix --ext .js,.jsx,.ts,.tsx --format=pretty && npm run lint:style",
     "lint-staged:js": "eslint . --ext .js,.jsx,.ts,.tsx "
