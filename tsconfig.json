@@ -23,9 +23,10 @@
       "@common/*": ["src/common/*"],
       "@component/*": ["src/component/*"],
       "@assets/*": ["src/assets/*"],
-      "@utils/*": ["src/utils/*"]
+      "@utils/*": ["src/utils/*"],
+      "@/*": ["src/*"],
     }
   },
-  "include": ["src"],
-  "references": [{ "path": "./tsconfig.node.json" }]
+  "include": ["src/**/*", "config/**/*"],
+  "exclude": ["node_modules", "build", "dist", "scripts"]
 }

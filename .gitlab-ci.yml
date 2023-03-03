@@ -22,7 +22,11 @@ before_script:
   - export IMAGE_VERSION=$([[ ${RELEASE_FLAG} = 1 ]] && echo $RELEASE_VERSION || echo $BASE_VERSION)
   - export HARBOR_GROUP_NAME=${CI_PROJECT_NAMESPACE,,}
   - export APP_NAME=${CI_PROJECT_NAME,,}
-
+  
+  - git submodule deinit --force --all
+  - rm -rf .git/modules/
+  - git submodule sync --recursive
+  - git submodule update --init --remote --recursive --force
   - git fetch
 
 stages:

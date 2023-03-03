@@ -10,7 +10,8 @@
       "@hook/*": ["src/hook/*"],
       "@component/*": ["src/component/*"],
       "@assets/*": ["src/assets/*"],
-      "@utils/*": ["src/utils/*"]
+      "@utils/*": ["src/utils/*"],
+      "@/*": ["src/*"],
     }
   }
 }
