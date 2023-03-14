@@ -1,9 +1,9 @@
 // sys-setting-ui
-import sysRoutes from '@/common-biz/sys-setting-ui/routes';
+// import sysRoutes from '@/common-biz/sys-setting-ui/routes';
 
 // 可采用相当路径 or 绝对路径，而且path 可以前缀不一致也可以放在一起
 export default [
-  ...sysRoutes,
+  // ...sysRoutes,
   {
     redirect: '/welcome',
   },
@@ -34,8 +34,8 @@ export default [
           {
             path: '/sub-page2222',
             name: 'demo111',
-            hideInMenu: true,
-            key: 'demo',
+            // hideInMenu: true,
+            // key: 'demo',
             component: () => import('@pages/welcome'),
           },
           {

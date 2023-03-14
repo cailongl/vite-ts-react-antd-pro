@@ -1,68 +1,47 @@
 import type { MenuDataItem } from '@ant-design/pro-components';
 import { ProLayout } from '@ant-design/pro-components';
 import React, { Suspense, useMemo } from 'react';
-import { Link, Redirect, Route, useLocation, Switch } from 'react-router-dom';
+import { Link, Navigate, Route, Routes, useLocation } from 'react-router-dom';
 
 import routesConfig, { ROUTE_MAP } from './routes';
 
-function resolcePath(path: string) {
-  const url = path
-    .split('/')
-    .filter((p) => !!p)
-    .join('/');
-  return '/' + url;
-}
-
 /**
- * 处理路由数据 => Routes，将数据处理成对应的`Route`，Route 跟随数据一直，嵌套的
+ * 处理路由数据 => Routes，将数据处理成对应的`Route`，但不是跟数据一样嵌套的，这边节点是打平的，为了更方便变更菜单，不然会有前缀path必须一致的问题
+ * 如果需要嵌套路由，请在组件内添加 Route
  * @param routeData {MenuDataItem} 路由数据
  * @param cacheRoutes {any} Route数组
  * @returns
  */
-function generateRoute(routeData: MenuDataItem[]) {
-  const loop = (route: MenuDataItem[], parentPath: string) => {
-    return route.map((rt) => {
-      const { component: renderComponent, redirect = '', routes, path = '' } = rt;
-      const currentPath = path.startsWith('/') ? path : resolcePath(`${parentPath}/${path}`);
-      if (redirect) {
-        const redirectUrl = redirect.startsWith('/')
-          ? redirect
-          : resolcePath(`${parentPath}/${redirect}`);
-        return (
-          <Redirect
-            exact
-            strict
-            key={`redirect-${redirectUrl}`}
-            from={currentPath}
-            to={redirectUrl}
-          />
-        );
-      }
-      const child = (
-        <Switch>{Array.isArray(routes) && !!routes.length && loop(routes, currentPath)}</Switch>
+function generateRoute(routeData: MenuDataItem[], cacheRoutes: any[] = []) {
+  const loop = (route: MenuDataItem, parentRoute?: MenuDataItem) => {
+    const { component: getComponent, redirect, routes } = route;
+    if (Array.isArray(routes) && routes.length > 0) {
+      // 有子集渲染子集Route，自己不渲染Route
+      routes.forEach((rs: MenuDataItem) => loop(rs, route));
+    } else if (redirect) {
+      // 渲染redirect Route
+      cacheRoutes.push(
+        <Route
+          key={`redirect-${redirect}`}
+          path={parentRoute?.path || '/'}
+          element={<Navigate replace to={redirect} />}
+        />,
       );
-      if (renderComponent) {
-        const RouteComponent = React.lazy(() => renderComponent());
-        return (
-          <Route strict key={`route-${currentPath}`} path={currentPath}>
-            <RouteComponent>{child}</RouteComponent>
-          </Route>
-        );
-      }
-      return (
-        <Route strict key={`route-${currentPath}`} path={currentPath}>
-          {child}
-        </Route>
+    } else {
+      const Component = getComponent && React.lazy(() => getComponent());
+      // 渲染正常的Route
+      cacheRoutes.push(
+        <Route key={`route-${route.path}`} path={route.path} element={<Component />} />,
       );
-    });
+    }
   };
-  return loop(routeData, '/');
+  routeData.map((rt) => loop(rt));
+  return cacheRoutes;
 }
 
 const App = function App() {
   const location = useLocation();
   const nestedRoutes = useMemo(() => generateRoute(routesConfig), []);
-  console.log('nestedRoutes...', nestedRoutes, routesConfig);
   return (
     <ProLayout
       route={{ routes: routesConfig }}
@@ -87,7 +66,7 @@ const App = function App() {
       menuItemRender={(item: any, dom: any) => <Link to={item.path}>{dom}</Link>}
     >
       <Suspense fallback={<div>loading...</div>}>
-        <Switch>{nestedRoutes}</Switch>
+        <Routes>{nestedRoutes}</Routes>
       </Suspense>
     </ProLayout>
   );
