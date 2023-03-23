@@ -9,7 +9,10 @@ export default [
   },
   {
     path: '/welcome',
-    name: '欢迎',
+    name: '首页',
+    // 内部是否有nestRoutes
+    hasNestRoutes: true,
+    key: 'dashboard',
     component: () => import('@pages/welcome'),
   },
   {
@@ -17,32 +20,34 @@ export default [
     path: '/list',
     routes: [
       {
-        redirect: 'sub-page2',
+        redirect: 'sub-page',
       },
       {
-        path: 'sub-page2',
-        name: '欢迎页',
-        component: () => import('@pages/welcome'),
+        path: 'sub-page',
+        name: 'SubPage',
+        component: () => import('@pages/demo/sub-page'),
       },
       {
-        path: '/list/sub-page3',
+        // 绝对路径
+        path: '/list/sub-page2',
         name: 'demo页',
         routes: [
           {
-            redirect: 'sub-page33333',
+            redirect: 'sub-page2',
           },
           {
-            path: '/sub-page2222',
-            name: 'demo111',
+            // 绝对路径
+            path: 'sub-page2',
+            name: 'sub-page2',
             // hideInMenu: true,
             // key: 'demo',
-            component: () => import('@pages/welcome'),
+            component: () => import('@pages/demo/sub-page2'),
           },
           {
-            path: 'sub-page33333',
-            name: 'dem222',
-            key: 'demo',
-            component: () => import('@pages/demo'),
+            path: '/sub-page3',
+            name: 'sub-page3',
+            // key: 'demo',
+            component: () => import('@pages/demo/sub-page3'),
           },
         ],
       },

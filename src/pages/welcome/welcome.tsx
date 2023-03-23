@@ -1,9 +1,12 @@
 import { PageContainer, ProCard } from '@ant-design/pro-components';
-import { Button } from 'antd';
+import { Button, Row, Space } from 'antd';
 import { history } from '@utils/umi';
-function Welcome() {
+import { Outlet, Route, Routes, Navigate } from 'react-router-dom';
+import { Link, useLocation } from '@utils/umi';
+
+const App1 = () => {
   return (
-    <PageContainer>
+    <>
       <ProCard title="标题1" headerBordered>
         welcome1
         <div onClick={() => console.log(null, 1, 2, 3)}></div>
@@ -11,13 +14,39 @@ function Welcome() {
       <ProCard title="标题2" headerBordered>
         welcome2
       </ProCard>
+      <Row>
+        <div>child is here</div>
+        <Outlet />
+      </Row>
+    </>
+  );
+};
+
+function Welcome() {
+  const location = useLocation();
+  console.log('location...', location);
+  return (
+    <PageContainer>
       <Button
         onClick={() => {
-          history.push('/list/sub-page3/sub-page33333');
+          history.push('/list/sub-page2');
         }}
       >
         跳转
       </Button>
+      <Space>
+        <Link to={'apple'}>apple</Link>
+        <Link to={'orange'}>orange</Link>
+        <Link to={'bannan'}>bannan</Link>
+      </Space>
+      <Routes>
+        <Route path="/" element={<Navigate to="apple" />} />
+        <Route path="/" element={<App1 />}>
+          <Route path="apple" element={<h1>apple</h1>} />
+          <Route path="orange" element={<h1>orange</h1>} />
+          <Route path="bannan" element={<h1>bannan</h1>} />
+        </Route>
+      </Routes>
     </PageContainer>
   );
 }

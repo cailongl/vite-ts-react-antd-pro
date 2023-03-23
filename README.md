@@ -40,6 +40,7 @@
 ## Path alias
 
 ```ts
+  '@': resolve(__dirname, 'src'),
   '@pages': resolve(__dirname, 'src/pages'),
   '@service': resolve(__dirname, 'src/service'),
   '@common': resolve(__dirname, 'src/common'),
@@ -83,6 +84,48 @@
       },
     ],
   },
+```
+
+## 嵌套路由
+
+```ts
+// route 配置
+{
+  path: '/path',
+  // 自定义的字段，非官方
+  hasChildRoutes： true,
+  name: '欢迎',
+  component: () => import('@pages/NestRoutes'),
+}
+
+// NestRoutes
+const NestRoutes = () => {
+  return (
+    <Routes>
+      <Route path="/" element={<Navigate to="apple" />} />
+      <Route path="/" element={<App />}>
+        <Route path="apple" element={<h1>apple</h1>} />
+        <Route path="orange" element={<h1>orange</h1>} />
+        <Route path="bannan" element={<h1>bannan</h1>} />
+      </Route>
+    </Routes>
+  )
+}
+
+// App
+
+const App = () => {
+  return (
+    <div>
+    // common UI
+      <div>
+        // child will render in `Outlet`
+        <Outlet />
+      </div>
+    </div>
+  )
+}
+
 ```
 
 ## Environment Prepare

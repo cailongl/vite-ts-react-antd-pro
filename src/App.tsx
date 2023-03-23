@@ -6,7 +6,7 @@ import { Link, Navigate, Route, Routes, useLocation } from 'react-router-dom';
 import routesConfig, { ROUTE_MAP } from './routes';
 
 /**
- * 处理路由数据 => Routes，将数据处理成对应的`Route`，但不是跟数据一样嵌套的，这边节点是打平的，为了更方便变更菜单，不然会有前缀path必须一致的问题
+ * 处理路由数据 => Routes，将数据处理成对应的`Route`，但不是跟数据一样嵌套的，这边节点是打平的，
  * 如果需要嵌套路由，请在组件内添加 Route
  * @param routeData {MenuDataItem} 路由数据
  * @param cacheRoutes {any} Route数组
@@ -14,7 +14,7 @@ import routesConfig, { ROUTE_MAP } from './routes';
  */
 function generateRoute(routeData: MenuDataItem[], cacheRoutes: any[] = []) {
   const loop = (route: MenuDataItem, parentRoute?: MenuDataItem) => {
-    const { component: getComponent, redirect, routes } = route;
+    const { component: getComponent, redirect, routes, hasNestRoutes } = route;
     if (Array.isArray(routes) && routes.length > 0) {
       // 有子集渲染子集Route，自己不渲染Route
       routes.forEach((rs: MenuDataItem) => loop(rs, route));
@@ -31,7 +31,12 @@ function generateRoute(routeData: MenuDataItem[], cacheRoutes: any[] = []) {
       const Component = getComponent && React.lazy(() => getComponent());
       // 渲染正常的Route
       cacheRoutes.push(
-        <Route key={`route-${route.path}`} path={route.path} element={<Component />} />,
+        <Route
+          key={`route-${route.path}`}
+          // 兼容ProLayout 菜单active匹配与router@v6 nest routes
+          path={route.path + (hasNestRoutes ? '/*' : '')}
+          element={<Component />}
+        />,
       );
     }
   };
