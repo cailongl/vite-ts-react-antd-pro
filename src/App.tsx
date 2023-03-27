@@ -14,7 +14,7 @@ import routesConfig, { ROUTE_MAP } from './routes';
  */
 function generateRoute(routeData: MenuDataItem[], cacheRoutes: any[] = []) {
   const loop = (route: MenuDataItem, parentRoute?: MenuDataItem) => {
-    const { component: getComponent, redirect, routes, hasNestRoutes } = route;
+    const { component: getComponent, redirect, routes, isNestRoutes } = route;
     if (Array.isArray(routes) && routes.length > 0) {
       // 有子集渲染子集Route，自己不渲染Route
       routes.forEach((rs: MenuDataItem) => loop(rs, route));
@@ -34,7 +34,7 @@ function generateRoute(routeData: MenuDataItem[], cacheRoutes: any[] = []) {
         <Route
           key={`route-${route.path}`}
           // 兼容ProLayout 菜单active匹配与router@v6 nest routes
-          path={route.path + (hasNestRoutes ? '/*' : '')}
+          path={route.path + (isNestRoutes ? '/*' : '')}
           element={<Component />}
         />,
       );

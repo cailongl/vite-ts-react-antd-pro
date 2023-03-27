@@ -11,8 +11,7 @@ export default [
     path: '/welcome',
     name: '首页',
     // 内部是否有nestRoutes
-    hasNestRoutes: true,
-    key: 'dashboard',
+    isNestRoutes: true,
     component: () => import('@pages/welcome'),
   },
   {

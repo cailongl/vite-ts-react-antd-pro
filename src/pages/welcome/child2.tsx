@@ -1,12 +1,12 @@
 import { PageContainer, ProBreadcrumb } from '@ant-design/pro-components';
 
-function SubPage3() {
+function SubPage() {
   return (
     <PageContainer>
       <ProBreadcrumb className="pb16 pt16" />
-      SubPage3
+      child2
     </PageContainer>
   );
 }
 
-export default SubPage3;
+export default SubPage;

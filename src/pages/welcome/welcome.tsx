@@ -1,4 +1,4 @@
-import { PageContainer, ProCard } from '@ant-design/pro-components';
+import { PageContainer, ProCard, ProBreadcrumb } from '@ant-design/pro-components';
 import { Button, Row, Space } from 'antd';
 import { history } from '@utils/umi';
 import { Outlet, Route, Routes, Navigate } from 'react-router-dom';
@@ -34,6 +34,8 @@ function Welcome() {
       >
         跳转
       </Button>
+      <ProBreadcrumb className="pb16 pt16" />
+
       <Space>
         <Link to={'apple'}>apple</Link>
         <Link to={'orange'}>orange</Link>
