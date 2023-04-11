@@ -38,6 +38,8 @@ export default defineConfig(({ mode }) => {
         '@utils': resolve(__dirname, 'src/utils'),
         '@routes': resolve(__dirname, 'src/routes'),
         '~antd': resolve(__dirname, 'node_modules/antd'),
+        // 适配umi
+        umi: resolve(__dirname, 'src/utils/umi.ts'),
       },
     },
     build: {

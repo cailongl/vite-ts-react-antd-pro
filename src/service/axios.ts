@@ -27,29 +27,16 @@ axios.interceptors.response.use(
 
 axios.defaults.baseURL = import.meta.env.VITE_PUBLIC_API_PATH;
 
+export type RequestConfig = AxiosRequestConfig & Record<string, any>;
+
 /**
  * 统一的request 入口
  * @param config {AxiosRequestConfig}
  * @returns {Promise<any>}
  */
-export function request(url: string, config?: AxiosRequestConfig, isShowErrorMsg?: boolean) {
-  return new Promise((resolve, reject) => {
-    axios({
-      url,
-      ...config,
-    }).then(
-      (res: any) => {
-        if ([200, 0].includes(res?.code)) {
-          resolve(res);
-        } else {
-          isShowErrorMsg && message.error(res?.message || DEFAULT_MESSAGE);
-          reject(res);
-        }
-      },
-      (error) => {
-        isShowErrorMsg && message.error(error?.message || DEFAULT_MESSAGE);
-        reject(error);
-      },
-    );
+export function request(url: string, config?: RequestConfig) {
+  return axios({
+    url,
+    ...config,
   });
 }

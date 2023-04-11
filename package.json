@@ -73,7 +73,7 @@
   ],
   "lint-staged": {
     "**/*.less": "npm run lint:style",
-    "**/*.{js,jsx,ts,tsx}": "npm run lint-staged:js",
+    "**/*.{js,jsx,ts,tsx}": "npm run lint:js",
     "**/*.{js,jsx,tsx,ts,less,json}": [
       "prettier --write"
     ]

@@ -1,12 +1,4 @@
-# # [submodule "src/edge-ui"]
-# # 	path = src/edge-ui
-# # 	url = ssh://git@10.12.0.79:222/gaia-ui/edge-ui.git
-# # 	branch = release/1.6.0
-# # [submodule "src/common-biz/data-asset-ui"]
-# # 	path = src/common-biz/data-asset-ui
-# # 	url = ssh://git@10.12.0.79:222/gaia-ui/data-asset-ui.git
-# # 	branch = release/1.1.1
-# [submodule "src/common-biz/sys-setting-ui"]
-# 	path = src/common-biz/sys-setting-ui
-# 	url = ssh://git@10.12.0.79:222/gaia-ui/sys-settings-ui.git
-# 	branch = dev-vite
+[submodule "src/be-common"]
+	path = src/be-common
+	url = ssh://git@10.12.0.79:222/gaia-ui/be-common.git
+	branch = 1.0.0

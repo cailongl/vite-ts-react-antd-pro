@@ -25,6 +25,8 @@
       "@assets/*": ["src/assets/*"],
       "@utils/*": ["src/utils/*"],
       "@/*": ["src/*"],
+      // 兼容umi
+      "umi": ["src/utils/umi.ts"]
     }
   },
   "include": ["src/**/*", "config/**/*"],
