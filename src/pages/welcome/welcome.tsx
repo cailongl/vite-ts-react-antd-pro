@@ -29,7 +29,7 @@ function Welcome() {
     <PageContainer>
       <Button
         onClick={() => {
-          history.push('/list/sub-page2');
+          history.push('/list/sub-page2/sub-demo');
         }}
       >
         跳转

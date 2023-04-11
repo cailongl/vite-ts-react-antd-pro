@@ -36,6 +36,14 @@ export default [
           },
           {
             // 绝对路径
+            path: 'sub-demo',
+            name: 'sub-demo',
+            hideInMenu: true,
+            // key: 'demo',
+            component: () => import('@pages/demo'),
+          },
+          {
+            // 绝对路径
             path: 'sub-page2',
             name: 'sub-page2',
             // hideInMenu: true,

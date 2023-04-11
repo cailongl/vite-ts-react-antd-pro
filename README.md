@@ -128,6 +128,31 @@ const App = () => {
 
 ```
 
+## less 用法
+
+`less` 的用法遵循规范，`module` 形式，需要在后缀加`module.less`, 不加会被按照普通的`css`处理
+
+- 普通使用方式
+
+```less
+import './index.less'
+
+...
+
+<div className="xxx">
+```
+
+- module 用法
+
+```less
+import s from './index.module.less'
+
+...
+
+<div className={s.xxx}>
+```
+
+
 ## Environment Prepare
 
 Install `node_modules`:
