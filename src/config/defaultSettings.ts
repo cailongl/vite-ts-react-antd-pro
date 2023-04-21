@@ -1,8 +1,14 @@
-import type { Settings as LayoutSettings } from '@ant-design/pro-layout';
+import type { ProLayoutProps } from '@ant-design/pro-components';
+import {DEFAULT_TENANT_INFO} from './tenantInfo'
 
 const { VITE_PUBLIC_RES_PATH, VITE_PUBLIC_API_PATH } = import.meta.env;
 
-const Settings: LayoutSettings & {
+export {
+  VITE_PUBLIC_RES_PATH, 
+  VITE_PUBLIC_API_PATH,
+}
+
+const Settings: ProLayoutProps & {
   pwa?: boolean;
   logo?: string;
   // tenantInfo?: TenantInfo;
@@ -15,15 +21,26 @@ const Settings: LayoutSettings & {
   uiConfig?: any;
   apiPrefix: string;
   resPrefix: string;
+  key?: string;
+  tenantInfo: Record<string, any>,
+  [key: string]: any,
 } = {
   navTheme: 'light',
+  headerTheme: 'light',
   // 拂晓蓝
-  primaryColor: '#1890ff',
   contentWidth: 'Fluid',
+  headerHeight: 60,
+  colorWeak: false,
+  fixedHeader: false,
+  fixSiderbar: true,
+  splitMenus: true,
+  siderWidth: 208,
+  layout: 'mix',
   title: 'GAIA',
+  collapsed: false,
   // logo: '',
   iconfontUrl: `${VITE_PUBLIC_RES_PATH}/iconfont/iconfont.js`,
-  // tenantInfo: DEFAULT_TENANT_INFO,
+  tenantInfo: DEFAULT_TENANT_INFO,
   enableCustomTheme: true,
   apiPrefix: VITE_PUBLIC_API_PATH,
   resPrefix: VITE_PUBLIC_RES_PATH,

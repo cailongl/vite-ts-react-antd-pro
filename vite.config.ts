@@ -1,11 +1,10 @@
 import react from '@vitejs/plugin-react';
 import { resolve } from 'path';
 import { defineConfig, loadEnv } from 'vite';
-// import viteEslint from 'vite-plugin-eslint';
-// import visiualizer from 'rollup-plugin-visualizer';
-// import vitePluginImp from 'vite-plugin-imp';
+import vitePluginImp from 'vite-plugin-imp';
 
 import proxyConfig from './config/proxy';
+import projectConfig from './config/config';
 const packageInfo = require('./package.json');
 
 // https://vitejs.dev/config/
@@ -20,11 +19,14 @@ export default defineConfig(({ mode }) => {
           },
         },
       }),
-      // visiualizer({
-      //   open: true,
-      //   gzipSize: true,
-      //   brotliSize: true,
-      // }),
+      vitePluginImp({
+        libList: [
+          {
+            libName: 'antd',
+            style: (name) => `antd/es/${name}/style`,
+          },
+        ],
+      }),
     ],
     resolve: {
       alias: {
@@ -37,9 +39,8 @@ export default defineConfig(({ mode }) => {
         '@assets': resolve(__dirname, 'src/assets'),
         '@utils': resolve(__dirname, 'src/utils'),
         '@routes': resolve(__dirname, 'src/routes'),
+        '@config': resolve(__dirname, 'src/config'),
         '~antd': resolve(__dirname, 'node_modules/antd'),
-        // 适配umi
-        umi: resolve(__dirname, 'src/utils/umi.ts'),
       },
     },
     build: {
@@ -66,7 +67,7 @@ export default defineConfig(({ mode }) => {
         less: {
           javascriptEnabled: true,
           modifyVars: {
-            '@primary-color': '#1890ff',
+            '@primary-color': projectConfig.primaryColor,
           },
         },
       },

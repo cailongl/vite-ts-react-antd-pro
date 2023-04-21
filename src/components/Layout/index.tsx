@@ -2,8 +2,11 @@ import type { MenuDataItem } from '@ant-design/pro-components';
 import { ProLayout } from '@ant-design/pro-components';
 import React, { Suspense, useMemo } from 'react';
 import { Link, Navigate, Route, Routes, useLocation } from 'react-router-dom';
+import { PageLoading } from '@ant-design/pro-components';
 
-import routesConfig, { ROUTE_MAP } from './routes';
+import routesConfig from '@/routes';
+
+import defaulSetting from '@config/defaultSettings';
 
 /**
  * 处理路由数据 => Routes，将数据处理成对应的`Route`，但不是跟数据一样嵌套的，这边节点是打平的，
@@ -14,10 +17,10 @@ import routesConfig, { ROUTE_MAP } from './routes';
  */
 function generateRoute(routeData: MenuDataItem[], cacheRoutes: any[] = []) {
   const loop = (route: MenuDataItem, parentRoute?: MenuDataItem) => {
-    const { component: getComponent, redirect, routes, isNestRoutes } = route;
-    if (Array.isArray(routes) && routes.length > 0) {
+    const { component: getComponent, redirect, children, isNestRoutes } = route;
+    if (Array.isArray(children) && children.length > 0) {
       // 有子集渲染子集Route，自己不渲染Route
-      routes.forEach((rs: MenuDataItem) => loop(rs, route));
+      children.forEach((rs: MenuDataItem) => loop(rs, route));
     } else if (redirect) {
       // 渲染redirect Route
       cacheRoutes.push(
@@ -51,26 +54,31 @@ const App = function App() {
     <ProLayout
       route={{ routes: routesConfig }}
       location={location}
-      headerHeight={56}
-      navTheme="light"
-      contentWidth="Fluid"
-      title="GAIA"
-      colorWeak={false}
-      fixedHeader={false}
-      fixSiderbar
-      splitMenus
-      layout="mix"
-      siderWidth={208}
+      logo={null}
+      collapsedButtonRender={false}
+      {...defaulSetting}
+
+      // rightContentRender={() => {
+      //   return <RightContent />;
+      // }}
       breadcrumbProps={{
+        separator: '>',
         itemRender: (route) => <Link to={route.path}>{route.breadcrumbName}</Link>,
       }}
-      breadcrumbRender={() => {
-        const currentRouteData = ROUTE_MAP[location.pathname];
-        return currentRouteData?.position || [];
-      }}
+      // breadcrumbRender={(routers = []) => [
+      //   {
+      //     path: '/',
+      //     breadcrumbName: '主页',
+      //   },
+      //   ...routers,
+      // ]}
+      // breadcrumbRender={() => {
+      //   const currentRouteData = ROUTE_MAP[location.pathname];
+      //   return currentRouteData?.position || [];
+      // }}
       menuItemRender={(item: any, dom: any) => <Link to={item.path}>{dom}</Link>}
     >
-      <Suspense fallback={<div>loading...</div>}>
+      <Suspense fallback={<PageLoading />}>
         <Routes>{nestedRoutes}</Routes>
       </Suspense>
     </ProLayout>

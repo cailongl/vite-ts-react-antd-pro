@@ -155,10 +155,10 @@ import s from './index.module.less'
 
 ## Environment Prepare
 
-Install `node_modules`:
+Install `node_modules`: 推荐使用 `yarn`
 
 ```bash
-npm install
+yarn install
 ```
 
 ### Start project

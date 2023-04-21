@@ -1,4 +1,4 @@
-export const themeNameList = {
+export const THEME_LIST = {
   light: {
     title: '亮色主题',
     name: 'light',

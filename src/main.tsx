@@ -1,18 +1,23 @@
 import ReactDOM from 'react-dom/client';
+import { PageLoading } from '@ant-design/pro-components';
 import { CustomHashRouter } from '@utils/customRouter';
 import { GlobalContext } from '@hook/globalState';
-import { useState } from 'react';
+import { useLayoutEffect, useState } from 'react';
+import Layout from '@components/Layout';
+import { getInitialState } from '@config/initialState';
 
-import App from './App';
 import './index.less';
 
 const Main = () => {
-  const [state, setState] = useState<any>({});
+  const [state, setState] = useState<any>();
+  useLayoutEffect(() => {
+    getInitialState().then((res) => {
+      setState(res);
+    });
+  }, []);
   return (
     <GlobalContext.Provider value={{ initialState: state, setInitialState: setState }}>
-      <CustomHashRouter>
-        <App />
-      </CustomHashRouter>
+      <CustomHashRouter>{state ? <Layout /> : <PageLoading />}</CustomHashRouter>
     </GlobalContext.Provider>
   );
 };

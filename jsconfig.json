@@ -8,9 +8,10 @@
       "@service/*": ["src/service/*"],
       "@common/*": ["src/common/*"],
       "@hook/*": ["src/hook/*"],
-      "@component/*": ["src/component/*"],
+      "@components/*": ["src/components/*"],
       "@assets/*": ["src/assets/*"],
       "@utils/*": ["src/utils/*"],
+      "@config/*": ["src/config/*"],
       "@/*": ["src/*"],
     }
   }

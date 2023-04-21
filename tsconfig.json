@@ -4,7 +4,7 @@
     "target": "ESNext",
     "useDefineForClassFields": true,
     "lib": ["DOM", "DOM.Iterable", "ESNext"],
-    "allowJs": false,
+    "allowJs": true,
     "skipLibCheck": true,
     "esModuleInterop": false,
     "allowSyntheticDefaultImports": true,
@@ -21,14 +21,13 @@
       "@service/*": ["src/service/*"],
       "@hook/*": ["src/hook/*"],
       "@common/*": ["src/common/*"],
-      "@component/*": ["src/component/*"],
+      "@components/*": ["src/components/*"],
       "@assets/*": ["src/assets/*"],
       "@utils/*": ["src/utils/*"],
+      "@config/*": ["src/config/*"],
       "@/*": ["src/*"],
-      // 兼容umi
-      "umi": ["src/utils/umi.ts"]
     }
   },
-  "include": ["src/**/*", "config/**/*"],
+  "include": ["src/**/*", "config/**/*", "src/config/.ts", "src/config/.ts"],
   "exclude": ["node_modules", "build", "dist", "scripts"]
 }

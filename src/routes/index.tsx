@@ -33,7 +33,7 @@ function handleRoutes(routeData: MenuDataItem[], paranentRoute?: MenuDataItem): 
       path: realPath,
       name,
       position: currentPosition,
-      routes: handleRoutes(rest?.routes, {
+      children: handleRoutes(rest?.routes, {
         position: currentPosition,
         path: realPath,
       }),
