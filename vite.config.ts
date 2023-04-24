@@ -34,7 +34,7 @@ export default defineConfig(({ mode }) => {
         '@pages': resolve(__dirname, 'src/pages'),
         '@service': resolve(__dirname, 'src/service'),
         '@common': resolve(__dirname, 'src/common'),
-        '@components': resolve(__dirname, 'src/component'),
+        '@components': resolve(__dirname, 'src/components'),
         '@hook': resolve(__dirname, 'src/hook'),
         '@assets': resolve(__dirname, 'src/assets'),
         '@utils': resolve(__dirname, 'src/utils'),
