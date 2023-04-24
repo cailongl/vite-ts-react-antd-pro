@@ -8,7 +8,7 @@
     "build": "vite build --mode pro",
     "preview": "vite preview",
     "release": "npm install && npm run build",
-    "lint": "npm run lint:js",
+    "lint": "npm run lint-staged:js",
     "prettier": "prettier --write '**/*.{js,jsx,tsx,ts,json}'",
     "lint:js": "eslint --ext .js,.jsx,.ts,.tsx",
     "lint:fix": "eslint . --fix --ext .js,.jsx,.ts,.tsx --format=pretty",
