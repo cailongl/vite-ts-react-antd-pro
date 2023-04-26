@@ -1,8 +1,8 @@
 import defaultSettings from '@config/defaultSettings';
 import { getCurrentUser, getVerifyConfig } from '@service/common';
-import {message} from 'antd';
-import favicon from '@assets/image/favicon.png'
-import {history} from '@utils/umi'
+import { message } from 'antd';
+import favicon from '@assets/image/favicon.png';
+import { history } from '@utils/umi';
 import { isInWhiteList } from '@utils/utils';
 
 async function initTenantInfo() {
@@ -30,7 +30,7 @@ async function initTenantInfo() {
   defaultSettings.extraConfig = extraConfig;
 
   defaultSettings.key = data?.key;
-  defaultSettings.x = 1;
+  // defaultSettings.x = 1;
   const link = document.createElement('link');
   link.type = 'image/x-icon';
   link.rel = 'shortcut icon';
@@ -53,14 +53,14 @@ export async function getInitialState(): Promise<{
   settings?: typeof defaultSettings;
   currentUser?: any;
 }> {
-  await initTenantInfo()
+  await initTenantInfo();
   const { pathname } = history.location;
   if (!isInWhiteList(pathname)) {
-    const currentUser = await getCurrentUser()
+    const currentUser = await getCurrentUser();
     return {
       settings: defaultSettings,
       currentUser,
-    }
+    };
   }
   return {
     settings: defaultSettings,

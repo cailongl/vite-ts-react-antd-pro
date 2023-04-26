@@ -57,25 +57,14 @@ const App = function App() {
       logo={null}
       collapsedButtonRender={false}
       {...defaulSetting}
-
       // rightContentRender={() => {
       //   return <RightContent />;
       // }}
       breadcrumbProps={{
         separator: '>',
-        itemRender: (route) => <Link to={route.path}>{route.breadcrumbName}</Link>,
+        itemRender: (route: any) => <Link to={route.path}>{route.breadcrumbName}</Link>,
       }}
-      // breadcrumbRender={(routers = []) => [
-      //   {
-      //     path: '/',
-      //     breadcrumbName: '主页',
-      //   },
-      //   ...routers,
-      // ]}
-      // breadcrumbRender={() => {
-      //   const currentRouteData = ROUTE_MAP[location.pathname];
-      //   return currentRouteData?.position || [];
-      // }}
+      breadcrumbRender={(routers = []) => [...routers]}
       menuItemRender={(item: any, dom: any) => <Link to={item.path}>{dom}</Link>}
     >
       <Suspense fallback={<PageLoading />}>

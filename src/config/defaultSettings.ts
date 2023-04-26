@@ -1,12 +1,9 @@
 import type { ProLayoutProps } from '@ant-design/pro-components';
-import {DEFAULT_TENANT_INFO} from './tenantInfo'
+import { DEFAULT_TENANT_INFO } from './tenantInfo';
 
 const { VITE_PUBLIC_RES_PATH, VITE_PUBLIC_API_PATH } = import.meta.env;
 
-export {
-  VITE_PUBLIC_RES_PATH, 
-  VITE_PUBLIC_API_PATH,
-}
+export { VITE_PUBLIC_RES_PATH, VITE_PUBLIC_API_PATH };
 
 const Settings: ProLayoutProps & {
   pwa?: boolean;
@@ -22,14 +19,11 @@ const Settings: ProLayoutProps & {
   apiPrefix: string;
   resPrefix: string;
   key?: string;
-  tenantInfo: Record<string, any>,
-  [key: string]: any,
+  tenantInfo: Record<string, any>;
 } = {
   navTheme: 'light',
-  headerTheme: 'light',
   // 拂晓蓝
   contentWidth: 'Fluid',
-  headerHeight: 60,
   colorWeak: false,
   fixedHeader: false,
   fixSiderbar: true,

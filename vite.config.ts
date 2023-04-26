@@ -41,6 +41,9 @@ export default defineConfig(({ mode }) => {
         '@routes': resolve(__dirname, 'src/routes'),
         '@config': resolve(__dirname, 'src/config'),
         '~antd': resolve(__dirname, 'node_modules/antd'),
+        // 适配umi
+        '@umijs/max': resolve(__dirname, 'src/utils/umi.ts'),
+        umi: resolve(__dirname, 'src/utils/umi.ts'),
       },
     },
     build: {
@@ -82,6 +85,7 @@ export default defineConfig(({ mode }) => {
       GAIA_PACKAGE_NAME: JSON.stringify(packageInfo.name),
       GAIA_COMMIT_INFO: JSON.stringify(env.GAIA_COMMIT_INFO),
       GAIA_APP_VERSION: JSON.stringify(packageInfo?.version),
+      'process.env': {},
     },
   };
 });

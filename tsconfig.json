@@ -26,7 +26,10 @@
       "@utils/*": ["src/utils/*"],
       "@config/*": ["src/config/*"],
       "@routes/*": ["src/routes/*"],
-      "@/*": ["src/*"]
+      "@/*": ["src/*"],
+      // 兼容umi
+      "@umijs/max": ["src/utils/umi.ts"],
+      "umi": ["src/utils/umi.ts"]
     }
   },
   "include": ["src/**/*", "config/**/*", "src/config/.ts", "src/config/.ts"],

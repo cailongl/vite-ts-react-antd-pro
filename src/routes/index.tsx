@@ -17,9 +17,6 @@ function relativeToAbsoutePath(base: string, url?: string): string {
   return base + '/' + url;
 }
 
-// 报错路由数据信息，以path为key
-export const ROUTE_MAP: Record<string, any> = {};
-
 function handleRoutes(routeData: MenuDataItem[], paranentRoute?: MenuDataItem): MenuDataItem[] {
   if (!routeData) return [];
   const position = paranentRoute?.position || [];
@@ -33,12 +30,12 @@ function handleRoutes(routeData: MenuDataItem[], paranentRoute?: MenuDataItem): 
       path: realPath,
       name,
       position: currentPosition,
-      children: handleRoutes(rest?.routes, {
+      children: handleRoutes(rest?.routes || rest?.children, {
         position: currentPosition,
         path: realPath,
       }),
     };
-    return (ROUTE_MAP[realPath] = newRouteData);
+    return newRouteData;
   });
 }
 

@@ -11,9 +11,12 @@ import './index.less';
 const Main = () => {
   const [state, setState] = useState<any>();
   useLayoutEffect(() => {
-    getInitialState().then((res) => {
-      setState(res);
-    });
+    getInitialState().then(
+      (res) => {
+        setState(res);
+      },
+      () => setState({}),
+    );
   }, []);
   return (
     <GlobalContext.Provider value={{ initialState: state, setInitialState: setState }}>
