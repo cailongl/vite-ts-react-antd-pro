@@ -1,4 +1,4 @@
-# vite@3.0 + ts + react + antd Pro
+# vite + ts + react + antd Pro
 
 脱离 umijs，单独使用 pro-component
 
